@@ -1,7 +1,7 @@
 JournalRank
 ===========
 
-Exercise
+<b>Exercise</b>
 
 This is an practical exercise to test your programming and design skills. You should implement
 the following features using Java or Groovy. There is no need to persist any data to a database
@@ -19,7 +19,7 @@ should be done alphabetically on the journal’s name.
 
 ----------------------------------------------------------------------
 
-Scenario 1: Rank journals
+<b>Scenario 1: Rank journals</b>
 
 Given the following journals have scores for 2010: 
 
@@ -40,7 +40,7 @@ Rank Journal Score
 
 ----------------------------------------------------------------------
 
-Scenario 2: Rank journals with a shared rank
+<b>Scenario 2: Rank journals with a shared rank</b>
 
 Given the following journals have scores for 2009:
 
@@ -51,17 +51,17 @@ When the user views the ranked journals
 Then the order should be determined by score then journal name:
 
 
-Rank Journal Score
+Rank 	Journal 			Score
 
-1 Journal B 6.2
+1 		Journal B 		6.2
 
-1 Journal C 6.2
+1 		Journal C 		6.2
 
-3 Journal A 2.2
+3 		Journal A 		2.2
 
 ----------------------------------------------------------------------
 
-Scenario 3: Rank journals excluding review journals
+<b>Scenario 3: Rank journals excluding review journals</b>
 
 Given the following journals have scores for 2008:
 
