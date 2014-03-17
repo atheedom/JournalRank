@@ -7,7 +7,7 @@ This is an practical exercise to test your programming and design skills. You sh
 the following features using Java or Groovy. There is no need to persist any data to a database
 or to build a user interface. You should prove your code works by unit testing it to cover the
 features listed below. Automating your unit testing with Maven or Ant would be preferable.
-You have been asked to add a new feature to F1000 which provides the ability to rank journals.
+You have been asked to add a new feature which provides the ability to rank journals.
 
 Feature: Rank journals
 
