@@ -2,7 +2,7 @@ package com.journalrank.control.sort;
 
 public enum Direction {
     
-    ASC(-1), DESC(1);
+    ASCENDING(-1), DESCENDING(1);
     
     private int direction;
     

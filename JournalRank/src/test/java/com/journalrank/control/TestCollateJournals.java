@@ -1,8 +1,11 @@
 package com.journalrank.control;
 
 import static org.junit.Assert.*;
+import static com.journalrank.control.sort.Direction.ASCENDING;
+import static com.journalrank.control.sort.Direction.DESCENDING;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -11,7 +14,6 @@ import com.journalrank.control.filter.OutReview;
 import com.journalrank.control.rank.Numerical;
 import com.journalrank.control.sort.ByScore;
 import com.journalrank.control.sort.ByScoreThenName;
-import com.journalrank.control.sort.Direction;
 import com.journalrank.entity.Journal;
 
 public class TestCollateJournals {
@@ -39,10 +41,8 @@ public class TestCollateJournals {
         journalC.setReview(false);        
         journals.add(journalC);
         
-
-        Collate<Journal> collateJournals = new Collate<>();
-        Collate<Journal> sortedJournals = collateJournals.from(journals).sort(new ByScore(Direction.ASC)).rank(new Numerical());
-        
+        Collation<Journal> sortedJournals = Collation.from(journals).sort(new ByScore(ASCENDING)).rank(new Numerical());
+              
         assertEquals(journalA, sortedJournals.get(0));
         assertEquals(journalC, sortedJournals.get(1));
         assertEquals(journalB, sortedJournals.get(2));
@@ -72,10 +72,8 @@ public class TestCollateJournals {
         journalB.setScore(6.2f);
         journalB.setReview(false);
         journals.add(journalB);
-        
-     
-        Collate<Journal> collateJournals = new Collate<>();
-        Collate<Journal> collatedJournals = collateJournals.from(journals).sort(new ByScoreThenName(Direction.ASC)).rank(new Numerical());
+             
+        Collation<Journal> collatedJournals = Collation.from(journals).sort(new ByScoreThenName(ASCENDING)).rank(new Numerical());
 
         assertEquals(journalB, collatedJournals.get(0));
         assertEquals(journalC, collatedJournals.get(1));
@@ -111,8 +109,7 @@ public class TestCollateJournals {
         journalC.setReview(false);        
         journals.add(journalC);
               
-        Collate<Journal> collateJournals = new Collate<>();
-        Collate<Journal> collatedJournals = collateJournals.from(journals).filter(new OutReview()).sort(new ByScore(Direction.ASC)).rank(new Numerical());
+        Collation<Journal> collatedJournals = Collation.from(journals).filter(new OutReview()).sort(new ByScore(ASCENDING)).rank(new Numerical());
                
         assertEquals(journalC, collatedJournals.get(0));
         assertEquals(journalB, collatedJournals.get(1));
@@ -163,13 +160,40 @@ public class TestCollateJournals {
         journalC.setScore(1.2f);
         journalC.setReview(false);
 
-        ByScore sortByScoreAscending = new ByScore(Direction.ASC);
+        ByScore sortByScoreAscending = new ByScore(ASCENDING);
         assertEquals(sortByScoreAscending.compare(journalE, journalC), 1);
 
-        ByScore sortByScoreDescending = new ByScore(Direction.DESC);
+        ByScore sortByScoreDescending = new ByScore(DESCENDING);
         assertEquals(sortByScoreDescending.compare(journalE, journalC), -1);
-
+        
     }  
     
-    
+    @Test
+    public void unmodifiableList_should_be_allowed(){
+        List<Journal> journals = new ArrayList<>();
+        
+        Journal journalA = new Journal();
+        journalA.setName("Journal A");
+        journalA.setScore(5.6f);
+        journalA.setReview(true);
+        journals.add(journalA);
+        
+        Journal journalB = new Journal();
+        journalB.setName("Journal B");
+        journalB.setScore(2.4f);
+        journalB.setReview(false);
+        journals.add(journalB);
+        
+        Journal journalC = new Journal();
+        journalC.setName("Journal C");
+        journalC.setScore(3.1f);
+        journalC.setReview(false);        
+        journals.add(journalC);
+        
+        Collections.unmodifiableList(journals);
+        
+        Collation.from(journals).filter(new OutReview()).sort(new ByScore(ASCENDING)).rank(new Numerical());
+              
+    }
+       
 }

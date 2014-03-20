@@ -3,13 +3,14 @@ package com.journalrank.control.sort;
 import java.util.Comparator;
 
 import com.journalrank.entity.Journal;
+import static com.journalrank.control.sort.Direction.ASCENDING;
 
 public class ByScoreThenName implements Comparator<Journal> {
     
-    Direction direction;
+    private Direction direction;
     
     public ByScoreThenName(){
-        this.direction = Direction.ASC;
+        this.direction = ASCENDING;
     }
     
     public ByScoreThenName(Direction direction){
